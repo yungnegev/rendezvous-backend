@@ -4,7 +4,7 @@ import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
 import { loginController, registerController, currentController } from './controllers/users.js';
-// Load .env file  
+// Load .env file
 dotenv.config(); 
 
 
