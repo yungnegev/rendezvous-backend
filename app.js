@@ -3,7 +3,18 @@ import * as dotenv from 'dotenv'
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import { loginController, registerController, currentController } from './controllers/users.js';
+import auth from './middleware/auth.js';
+import { 
+    loginController, 
+    registerController, 
+    currentController 
+} from './controllers/users.js';
+import { 
+    getAllController 
+} from './controllers/logs.js';
+
+
+
 // Load .env file
 dotenv.config(); 
 
@@ -21,11 +32,16 @@ app.get('/', (req, res) =>{
 })
 
 // user routes
-app.post('/users/login', loginController);
-  
-app.post('/users/register', registerController);
+app.post('/api/users/login', loginController);
+app.post('/api/users/register', registerController);
+app.get('/api/users/current', auth, currentController);
 
-app.get('/users/current', currentController);
+// log routes
+app.get('/api/logs', getAllController)
+app.get('/api/logs/:id', (req, res) => {})
+app.post('/api/logs', (req, res) => {})
+app.delete('/api/logs/:id', (req, res) => {})
+app.put('/api/logs/:id', (req, res) => {})
   
 
 app.listen(process.env.PORT || 8000, (err) => {

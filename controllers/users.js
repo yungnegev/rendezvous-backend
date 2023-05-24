@@ -91,5 +91,5 @@ export const registerController = async (req, res) => {
  }
 
 export const currentController = async (req, res) => {
-    res.send('current');
+    res.status(200).json(req.user)
 }
