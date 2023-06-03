@@ -62,6 +62,27 @@ export const createLogController = async (req, res) => {
     }
 }
 
+export const updateLogController = async (req, res) => {
+    try {
+        const data = req.body
+        const id = req.body.id
+
+        await prisma.log.update({
+            where: {
+                id: id
+            },
+            data: { 
+                ...data
+            }
+        })
+
+        res.status(200).json({ message: 'Log updated successfully.' })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Error updating log.' })
+    }
+}
+
 export const deleteLogController = async (req, res) => {
     try {
 
@@ -78,26 +99,5 @@ export const deleteLogController = async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Error removing log.' })
-    }
-}
-
-export const updateLogController = async (req, res) => {
-    try {
-        const data = req.body
-        const id = body.id
-
-        await prisma.log.update({
-            where: {
-                id: id
-            },
-            data: { 
-                ...data
-            }
-        })
-
-        res.status(204).json({ message: 'Log updated successfully.' })
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Error updating log.' })
     }
 }
