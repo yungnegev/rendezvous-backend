@@ -15,15 +15,15 @@ model User {
   email     String   @unique
   password  String
   name      String
-  people    Person[]
+  logs      Log[]
 }
 
-model Person {
+model Log {
   id          String   @id @default(cuid())
   firstName   String
   lastName    String
   address     String
-  age         Int
+  age         String
   createdAt   DateTime @default(now())
   userId      String
   user        User     @relation(fields: [userId], references: [id])

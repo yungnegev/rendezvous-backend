@@ -10,7 +10,11 @@ import {
     currentController 
 } from './controllers/users.js';
 import { 
-    getAllController 
+    getAllController,
+    getByIdController,
+    createLogController,
+    deleteLogController,
+    updateLogController
 } from './controllers/logs.js';
 
 
@@ -37,11 +41,11 @@ app.post('/api/users/register', registerController);
 app.get('/api/users/current', auth, currentController);
 
 // log routes
-app.get('/api/logs', getAllController)
-app.get('/api/logs/:id', (req, res) => {})
-app.post('/api/logs', (req, res) => {})
-app.delete('/api/logs/:id', (req, res) => {})
-app.put('/api/logs/:id', (req, res) => {})
+app.get('/api/logs', auth, getAllController)
+app.get('/api/logs/:id', auth, getByIdController)
+app.post('/api/logs', auth, createLogController)
+app.delete('/api/logs/:id', auth, deleteLogController)
+app.put('/api/logs/:id', auth, updateLogController)
   
 
 app.listen(process.env.PORT || 8000, (err) => {
